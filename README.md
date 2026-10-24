@@ -1,4 +1,4 @@
-# Gridbricks
+# kjnsfivjnfrikvnjf
 
 A focused January 2026 wind-forecast pilot: reconstruct the forecast available at a day-ahead decision cutoff, then evaluate it against actual generation. React/TypeScript frontend, Python/FastAPI backend, and Docker packaging.
 
