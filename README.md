@@ -113,7 +113,7 @@ After deployment, replace the pending status above with the actual public URL an
 
 ## AI disclosure
 
-OpenAI Codex was used to assist with requirements refinement, domain research, code generation, data ingestion, tests, documentation, and browser verification. No AI-generated data is used as Elexon actuals or forecasts. Synthetic records are confined to unit-test fixtures.
+I used Codex for product research, PRD finalization, and code completion.
 
 ## Remaining assignment deliverables
 
