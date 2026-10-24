@@ -1,0 +1,6 @@
+export type Row = {startTime:string; forecast:number|null; actual:number|null; publishTime:string|null; actualPublishTime:string|null; error:number|null; forecastStatus:string; actualStatus:string};
+export type Metrics = {expected:number; forecastCount:number; actualCount:number; matchedCount:number; coverage:number; mae:number|null; rmse:number|null; bias:number|null; overforecastFrequency:number|null; matchedForecastEnergy:number|null; matchedActualEnergy:number|null; shortfallEnergy:number|null};
+export type Decision = {decisionDate:string; deliveryDate:string; cutoff:string; rows:Row[]; metrics:Metrics|null; snapshotId:string; summary:{expected:number; forecastCount:number; meanForecast:number|null; peakForecast:number|null; forecastEnergy:number|null; publications:string[]; oldestAgeHours:number|null; newestAgeHours:number|null}};
+export type Daily = Metrics & {decisionDate:string; deliveryDate:string};
+export type Accuracy = {start:string; end:string; cutoff:string; snapshotId:string; metrics:Metrics; days:Daily[]; rows:Row[]; largestErrors:Row[]};
+export type Metadata = {snapshotId:string; retrievedAt:string; forecastRecords:number; actualRecords:number; sources:string[]; quality:Record<string,Record<string,number>>; alignment:string; actualPolicy:string; forecastMinuteCounts:Record<string,number>};
