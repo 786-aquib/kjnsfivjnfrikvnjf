@@ -1,17 +1,21 @@
 import {useEffect, useState} from 'react';
 
 export function useApi<T>(url: string | null) {
-  const [state, setState] = useState<{url: string; data: T | null; error: string | null}>({url: '', data: null, error: null});
+  const [data, setData] = useState<T | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
     if (!url) {
-      setState({url: '', data: null, error: null});
+      setData(null);
+      setError(null);
+      setLoading(false);
       return;
     }
     let isCancelled = false;
     const controller = new AbortController();
-    setState({url, data: null, error: null});
+    setLoading(true);
 
     fetch(url, {signal: controller.signal})
       .then(async response => {
@@ -39,14 +43,17 @@ export function useApi<T>(url: string | null) {
         }
         return body as T;
       })
-      .then(data => {
+      .then(result => {
         if (!isCancelled) {
-          setState({url, data, error: null});
+          setData(result);
+          setError(null);
+          setLoading(false);
         }
       })
-      .catch(error => {
-        if (error.name !== 'AbortError' && !isCancelled) {
-          setState({url, data: null, error: error instanceof Error ? error.message : 'Unable to load data.'});
+      .catch(err => {
+        if (err.name !== 'AbortError' && !isCancelled) {
+          setError(err instanceof Error ? err.message : 'Unable to load data.');
+          setLoading(false);
         }
       });
 
@@ -57,11 +64,13 @@ export function useApi<T>(url: string | null) {
   }, [url, attempt]);
 
   return {
-    data: url && state.url === url ? state.data : null,
-    error: url && state.url === url ? state.error : null,
+    data,
+    error,
+    loading,
     retry: () => setAttempt(n => n + 1),
   };
 }
+
 
 export const number = (value: number | null | undefined, digits = 0): string => {
   if (value == null || typeof value !== 'number' || !Number.isFinite(value)) return '—';
