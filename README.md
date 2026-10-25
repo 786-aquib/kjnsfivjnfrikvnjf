@@ -2,7 +2,9 @@
 
 A focused January 2026 wind-forecast pilot: reconstruct the forecast available at a day-ahead decision cutoff, then evaluate it against actual generation. React/TypeScript frontend, Python/FastAPI backend, and Docker packaging.
 
-**Status:** local implementation. Public deployment, anonymous public repository publication, YouTube demo, and submission remain pending. There is no public deployment URL yet.
+**Live application:** https://kjnsfivjnfrikvnjf.vercel.app
+
+**Status:** publicly deployed from the anonymous GitHub repository. The unlisted YouTube demo and final submission remain pending.
 
 ## Run
 
@@ -45,8 +47,8 @@ For frontend hot reload, run `npm run dev` in `frontend/` with the backend on po
 | `data/snapshot.json` | Versioned real pilot data |
 | `data/raw/` | Compressed original Elexon responses |
 | `data/manifest.json` | Request URLs, retrieval timestamps, response hashes |
-| `Dockerfile`, `compose.yaml` | Multi-stage build and local container runtime |
-| `heroku.yml` | Heroku container build definition |
+| `Dockerfile`, `Dockerfile.vercel`, `compose.yaml` | Multi-stage local, Vercel, and Compose container configuration |
+| `.vercelignore` | Files excluded from the Vercel source upload |
 
 ## Data and methodology
 
@@ -107,9 +109,9 @@ API routes: `/api/health`, `/api/metadata`, `/api/decision?day=2026-01-15&cutoff
 
 ## Deployment
 
-The repository contains a Heroku container definition. The Docker image builds React and serves the generated assets through FastAPI on the injected `PORT`. Publish to a Heroku app configured for the container stack using this repository and `heroku.yml`. Hosting account access is required. The application does not need a database or API secret.
+The app is deployed at **https://kjnsfivjnfrikvnjf.vercel.app**. Vercel builds `Dockerfile.vercel`, which builds the React application and runs FastAPI in a container-image Function on the public project domain. The snapshot is bundled into the image, so no database, credential, or live Elexon request is needed at runtime.
 
-After deployment, replace the pending status above with the actual public URL and verify the core workflows while logged out. Docker container execution must also be checked on a machine with Docker Engine available; native Python/Node checks do not prove the container build.
+The public URL and `/api/health` were verified without credentials after deployment. The project is Git-connected: pushes to `main` create production deployments.
 
 ## AI disclosure
 
