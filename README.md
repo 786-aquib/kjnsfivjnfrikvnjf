@@ -114,13 +114,3 @@ After deployment, replace the pending status above with the actual public URL an
 ## AI disclosure
 
 I used Codex for product research, PRD finalization, and code completion.
-
-## Remaining assignment deliverables
-
-- Publish the code to a public GitHub repository with an anonymous/random name.
-- Deploy publicly on Heroku or Vercel and add the URL here.
-- Record and upload an unlisted YouTube video of no more than 10 minutes: customer section ≤5 minutes, technical section ≤5 minutes.
-- Verify repository, deployment, and video access in incognito mode.
-- Complete the submission form once its actual URL is supplied.
-
-Do not submit without the video.
